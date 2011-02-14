@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Facebook Graph API Explorer</title>
+	
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link rel="stylesheet" type="text/css" href="base.css">
+	<script src="jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.query-2.1.7.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.history.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="base.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="header">
+	<h1>Facebook Graph API Explorer</h1>
+</div>
+
+<div id="auth-panel">
+	<h2>Authentication</h2>
+	<label id="access_token_label" for="access_token">User Access Token</label>
+	<input type="text" id="access_token" value="" name="access_token" />
+	<input type="button" id="clear_access_token" value="Clear User Access Token" />
+	<input type="submit" id="start_auth" value="Get/Refresh User Access Token" />
+	<form id="perms" style="display:none">
+		<fieldset id="perms_pub">
+			<legend>Publishing &amp; Management Permissions</legend>
+			
+			<input type="checkbox" id="perms_publish_stream" name="publish_stream" value="1">
+			<label for="perms_publish_stream">publish_stream</label>
+			
+			<input type="checkbox" id="perms_create_event" name="create_event" value="1">
+			<label for="perms_create_event">create_event</label>
+			
+			<input type="checkbox" id="perms_rsvp_event" name="rsvp_event" value="1">
+			<label for="perms_rsvp_event">rsvp_event</label>
+			
+			<input type="checkbox" id="perms_sms" name="sms" value="1">
+			<label for="perms_sms">sms</label>
+			
+			<input type="checkbox" id="perms_offline_access" name="offline_access" value="1">
+			<label for="perms_offline_access">offline_access</label>
+			
+			<input type="checkbox" id="perms_publish_checkins" name="publish_checkins" value="1">
+			<label for="perms_publish_checkins">publish_checkins</label>
+			
+			<input type="checkbox" id="perms_manage_pages" name="manage_pages" value="1">
+			<label for="perms_manage_pages">manage_pages</label>
+		
+			<input type="checkbox" id="perms_read_insights" name="read_insights" value="1">
+			<label for="perms_read_insights">read_insights</label>
+			
+		</fieldset>
+		
+		<fieldset id="perms_user">
+			<legend>User Permissions</legend>
+			
+			<input type="checkbox" id="perms_user_about_me" name="user_about_me" value="1">
+			<label for="perms_user_about_me">user_about_me</label>
+			
+			<input type="checkbox" id="perms_user_activities" name="user_activities" value="1">
+			<label for="perms_user_activities">user_activities</label>
+			
+			<input type="checkbox" id="perms_user_birthday" name="user_birthday" value="1">
+			<label for="perms_user_birthday">user_birthday</label>
+			
+			<input type="checkbox" id="perms_user_education_history" name="user_education_history" value="1">
+			<label for="perms_user_education_history">user_education_history</label>
+			
+			<input type="checkbox" id="perms_user_events" name="user_events" value="1">
+			<label for="perms_user_events">user_events</label>
+			
+			<input type="checkbox" id="perms_user_groups" name="user_groups" value="1">
+			<label for="perms_user_groups">user_groups</label>
+			
+			<input type="checkbox" id="perms_user_hometown" name="user_hometown" value="1">
+			<label for="perms_user_hometown">user_hometown</label>
+			
+			<input type="checkbox" id="perms_user_interests" name="user_interests" value="1">
+			<label for="perms_user_interests">user_interests</label>
+
+			<input type="checkbox" id="perms_user_likes" name="user_likes" value="1">
+			<label for="perms_user_likes">user_likes</label>
+			
+			<input type="checkbox" id="perms_user_location" name="user_location" value="1">
+			<label for="perms_user_location">user_location</label>
+			
+			<input type="checkbox" id="perms_user_notes" name="user_notes" value="1">
+			<label for="perms_user_notes">user_notes</label>
+			
+			<input type="checkbox" id="perms_user_online_presence" name="user_online_presence" value="1">
+			<label for="perms_user_online_presence">user_online_presence</label>
+			
+			<input type="checkbox" id="perms_user_photo_video_tags" name="user_photo_video_tags" value="1">
+			<label for="perms_user_photo_video_tags">user_photo_video_tags</label>
+			
+			<input type="checkbox" id="perms_user_photos" name="user_photos" value="1">
+			<label for="perms_user_photos">user_photos</label>
+			
+			<input type="checkbox" id="perms_user_relationships" name="user_relationships" value="1">
+			<label for="perms_user_relationships">user_relationships</label>
+
+			<input type="checkbox" id="perms_user_relationship_details" name="user_relationship_details" value="1">
+			<label for="perms_user_relationship_details">user_relationship_details</label>
+			
+			<input type="checkbox" id="perms_user_religion_politics" name="user_religion_politics" value="1">
+			<label for="perms_user_religion_politics">user_religion_politics</label>
+			
+			<input type="checkbox" id="perms_user_status" name="user_status" value="1">
+			<label for="perms_user_status">user_status</label>
+			
+			<input type="checkbox" id="perms_user_videos" name="user_videos" value="1">
+			<label for="perms_user_videos">user_videos</label>
+			
+			<input type="checkbox" id="perms_user_website" name="user_website" value="1">
+			<label for="perms_user_website">user_website</label>
+			
+			<input type="checkbox" id="perms_user_work_history" name="user_work_history" value="1">
+			<label for="perms_user_work_history">user_work_history</label>
+
+			<input type="checkbox" id="perms_email" name="email" value="1">
+			<label for="perms_email">email</label>
+
+			<input type="checkbox" id="perms_read_friendlists" name="read_friendlists" value="1">
+			<label for="perms_read_friendlists">read_friendlists</label>
+			
+			<input type="checkbox" id="perms_manage_friendlists" name="manage_friendlists" value="1">
+			<label for="perms_manage_friendlists">manage_friendlists</label>
+
+			<input type="checkbox" id="perms_read_insights" name="read_insights" value="1">
+			<label for="perms_read_insights">read_insights</label>
+			
+			<input type="checkbox" id="perms_read_mailbox" name="read_mailbox" value="1">
+			<label for="perms_read_mailbox">read_mailbox</label>
+			
+			<input type="checkbox" id="perms_read_requests" name="read_requests" value="1">
+			<label for="perms_read_requests">read_requests</label>
+			
+			<input type="checkbox" id="perms_read_stream" name="read_stream" value="1">
+			<label for="perms_read_stream">read_stream</label>
+			
+			<input type="checkbox" id="perms_xmpp_login" name="xmpp_login" value="1">
+			<label for="perms_xmpp_login">xmpp_login</label>
+			
+			<input type="checkbox" id="perms_ads_management" name="ads_management" value="1">
+			<label for="perms_ads_management">ads_management</label>
+			
+			<input type="checkbox" id="perms_user_checkins" name="user_checkins" value="1">
+			<label for="perms_user_checkins">user_checkins</label>
+			
+		</fieldset>
+
+		<fieldset id="perms_friends">
+			<legend>Friends Permissions</legend>
+
+			<input type="checkbox" id="perms_friends_about_me" name="friends_about_me" value="1">
+			<label for="perms_friends_about_me">friends_about_me</label>
+
+			<input type="checkbox" id="perms_friends_activities" name="friends_activities" value="1">
+			<label for="perms_friends_activities">friends_activities</label>
+
+			<input type="checkbox" id="perms_friends_birthday" name="friends_birthday" value="1">
+			<label for="perms_friends_birthday">friends_birthday</label>
+
+			<input type="checkbox" id="perms_friends_education_history" name="friends_education_history" value="1">
+			<label for="perms_friends_education_history">friends_education_history</label>
+
+			<input type="checkbox" id="perms_friends_events" name="friends_events" value="1">
+			<label for="perms_friends_events">friends_events</label>
+
+			<input type="checkbox" id="perms_friends_groups" name="friends_groups" value="1">
+			<label for="perms_friends_groups">friends_groups</label>
+
+			<input type="checkbox" id="perms_friends_hometown" name="friends_hometown" value="1">
+			<label for="perms_friends_hometown">friends_hometown</label>
+
+			<input type="checkbox" id="perms_friends_interests" name="friends_interests" value="1">
+			<label for="perms_friends_interests">friends_interests</label>
+
+			<input type="checkbox" id="perms_friends_likes" name="friends_likes" value="1">
+			<label for="perms_friends_likes">friends_likes</label>
+
+			<input type="checkbox" id="perms_friends_location" name="friends_location" value="1">
+			<label for="perms_friends_location">friends_location</label>
+
+			<input type="checkbox" id="perms_friends_notes" name="friends_notes" value="1">
+			<label for="perms_friends_notes">friends_notes</label>
+
+			<input type="checkbox" id="perms_friends_online_presence" name="friends_online_presence" value="1">
+			<label for="perms_friends_online_presence">friends_online_presence</label>
+
+			<input type="checkbox" id="perms_friends_photo_video_tags" name="friends_photo_video_tags" value="1">
+			<label for="perms_friends_photo_video_tags">friends_photo_video_tags</label>
+
+			<input type="checkbox" id="perms_friends_photos" name="friends_photos" value="1">
+			<label for="perms_friends_photos">friends_photos</label>
+
+			<input type="checkbox" id="perms_friends_relationships" name="friends_relationships" value="1">
+			<label for="perms_friends_relationships">friends_relationships</label>
+
+			<input type="checkbox" id="perms_friends_relationship_details" name="friends_relationship_details" value="1">
+			<label for="perms_friends_relationship_details">friends_relationship_details</label>
+
+			<input type="checkbox" id="perms_friends_religion_politics" name="friends_religion_politics" value="1">
+			<label for="perms_friends_religion_politics">friends_religion_politics</label>
+
+			<input type="checkbox" id="perms_friends_status" name="friends_status" value="1">
+			<label for="perms_friends_status">friends_status</label>
+
+			<input type="checkbox" id="perms_friends_videos" name="friends_videos" value="1">
+			<label for="perms_friends_videos">friends_videos</label>
+
+			<input type="checkbox" id="perms_friends_website" name="friends_website" value="1">
+			<label for="perms_friends_website">friends_website</label>
+
+			<input type="checkbox" id="perms_friends_work_history" name="friends_work_history" value="1">
+			<label for="perms_friends_work_history">friends_work_history</label>
+
+			<input type="checkbox" id="perms_friends_checkins" name="friends_checkins" value="1">
+			<label for="perms_friends_checkins">friends_checkins</label>
+
+		</fieldset>
+
+	</form>
+	
+	<div id="auth_actions">
+		<input type="submit" id="toggle_perms" value="Show/Hide Extended Permissions" />
+		
+	</div>
+	
+	
+</div>
+
+<div id="request-panel">
+	<h2>Request:</h2>
+	<form id="request_form">
+		<fieldset id="request_main">
+			<select id="select_method" name="method">
+				<option value="GET">GET</option>
+				<option value="POST">POST</option>
+				<option value="DELETE">DELETE</option>
+			</select>
+			<label for="request">https://graph.facebook.com/</label>
+			<input type="text" name="request" id="request_url" value="me" />
+			<input type="submit" value="Go" id="request_submit">
+		</fieldset>
+		<div id="post_fields">
+			
+			<ul>
+				<li class="post_field">
+					<select name="fieldname[]">
+						<option value="">Select...</option>
+						<option value="message">message</option>
+						<option value="picture">picture</option>
+						<option value="link">link</option>
+						<option value="name">name</option>
+						<option value="subject">subject</option>
+						<option value="caption">caption</option>
+						<option value="description">description</option>
+						<option value="source">source</option>
+						<option value="name">name</option>
+						<option value="start_time">start_time</option>
+						<option value="end_time">end_time</option>
+						<option value="coordinates">coordinates</option>
+						<option value="place">place</option>
+					</select>
+					<input type="text" name="fieldvalue[]" />
+					<a href="#" class="remove_field">X</a>
+				</li>
+				<li>
+					<a href="#" class="add_field">Add field</a>
+				</li>
+			</ul>
+			
+		</div>
+	</form>
+</div>
+
+<div id="response-panel">
+	<div id="response-body">
+		<h2>API Response</h2>
+		<pre id="response"></pre>
+	</div>
+	<div id="response-meta">
+		<h2>Metadata</h2>
+		<h3>Connections</h3>
+		<div id="connections"></div>
+		<h3>Fields</h3>
+		<div id="fields"></div>
+	</div> 
+</div>
+
+
+
+</body>
+</html>

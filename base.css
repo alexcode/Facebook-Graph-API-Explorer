@@ -1,0 +1,173 @@
+body {
+    font-family: Trebuchet MS;
+    font-size: 13px;
+}
+#header {
+    background-color: #3B5998;
+}
+#header h1 {
+    color: #DFE3EE;
+    font-size: 2em;
+    padding: 10px;
+}
+h2 {
+    margin: 10px 0 5px 10px;
+    font-size:1.4em;
+    font-weight:bold;
+}
+h3 {
+    margin: 10px 0 5px 10px;
+    font-size:1.2em;
+    font-weight:bold;
+    color: #999;
+    clear:left;
+}
+
+#access_token_label {
+    margin-left:10px;
+
+}
+#access_token {
+    width: 500px;
+}
+
+#perms {
+    background: none repeat scroll 0 0 #EEEEEE;
+    margin: 5px;
+    overflow: auto;
+    padding: 5px;
+}
+#perms_pub,
+#perms_user,
+#perms_friends {
+    float:left;
+    width:30%;
+}
+#perms fieldset legend {
+    margin: 10px 0 0px 10px;
+    font-size:1.4em;
+    font-weight:bold;
+}
+#perms label {
+    width:38%;
+    display:inline-block;
+} 
+#perms input {
+    width:7%;
+}
+#auth_actions{
+    padding:10px 0 0 10px;
+}
+
+
+#auth-panel{
+    border-bottom: 1px solid #EEEEEE;
+    padding-bottom: 10px;  
+}
+
+#request-panel{
+    border-bottom: 1px solid #EEEEEE;
+    padding-bottom: 10px;
+}
+#request-panel #request_form{
+    margin: 0px 10px 0 10px;
+}
+#select_method {
+    width:70px;
+}
+#request_submit {
+    width:50px;
+    position:absolute;
+    right:20px;
+}
+#request_url {
+    margin-right: 80px;
+    position: absolute;
+    width: 60%;
+    width: -moz-available;
+}
+#post_fields{
+    display:none;
+    padding:5px 0;
+}
+
+#post_fields ul li {
+    padding:5px 0;
+}
+
+#post_fields ul li.post_field {
+    display:none;
+}
+
+#post_fields ul li.post_field input[type=text]{
+    width:300px;
+}
+ 
+
+/* RESPONSE */
+
+#response-panel {}
+#response-body {
+    float: left;
+    width: 70%;
+}
+#response-meta {
+    float: left;
+    width: 30%;
+}
+#response-meta #connections {
+    margin-left:10px;
+}
+#response-meta #connections ul {
+    overflow:auto;
+}
+#response-meta #connections ul li{
+    float: left;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+#response-meta #fields {
+    clear: both;
+    font-size: 0.8em;
+    height: 200px;
+    margin-left: 10px;
+    overflow: auto;
+}
+#response-meta #fields dl dt {
+    float:left;
+    width:25%;
+    font-weight:bold;
+}
+#response-meta #fields dl dd {
+    float:left;
+    width:70%;
+}
+
+#response {
+    border: 1px solid #DDDDDD;
+    font-family: monospace;
+    overflow: auto;
+    padding: 10px;
+    white-space: pre;
+    height:450px;
+    margin-left:10px;
+    margin-bottom: 10px;
+    background: none repeat scroll 0 0 #FCFCFC;
+}
+#response.error {
+    background: #FFE3E3;
+}
+#response.loading {
+    opacity: 0.5;
+    background: url(spinner.gif) no-repeat center 20%;
+}
+
+span.int {
+    color:red;
+}
+span.bool {
+    color:blue;
+}
+span.string {
+    color:green;
+}
