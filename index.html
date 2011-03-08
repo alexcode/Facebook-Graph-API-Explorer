@@ -280,6 +280,41 @@
 	</form>
 </div>
 
+<div id="fql-panel">
+	<h2>FQL Query:</h2>
+	<form id="fql_form">
+		<textarea id="fql_query"></textarea>
+		<input type="submit" value="Go" id="fql_submit">
+	</form>
+	<div id="fql-examples">
+		<h3>Example FQL Queries</h3>
+		<ul>
+			<li>
+				<a href="#">Get info from your own profile
+					<span>SELECT name, birthday, hometown_location FROM user WHERE uid = me()</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">Get some info about you and your friends
+					<span>SELECT uid, name, pic_square FROM user WHERE uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me())</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">Get your own likes
+					<span>SELECT page_id, name, type FROM page WHERE page_id IN (SELECT page_id FROM page_fan WHERE uid=me())</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">Get all your friends' likes (may timeout)
+					<span>SELECT page_id, name, type FROM page WHERE page_id IN (SELECT page_id FROM page_fan WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()))</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+
 <div id="response-panel">
 	<div id="response-body">
 		<h2>API Response</h2>

@@ -28,6 +28,18 @@ function Controller(){
           return false;
         });
         
+        // handle fql form submission
+        $('#fql_form').submit(function(){
+          controller.buildFqlRequest();
+          return false;
+        });
+        
+        $('#fql-examples ul li a').live('click', function(e){
+          var query = $('span', e.target).html();
+          controller.runFqlExample(query);
+          return false;
+        })
+        
         // listen for clicks to add more fields to the post form
         // handle request form submission
         $('#post_fields ul li a.add_field').live('click', function(){
@@ -101,6 +113,16 @@ function Controller(){
         }
     }
     
+    this.buildFqlRequest = function(){
+        var fqlquery = $('#fql_query').attr('value');
+        window.location.hash = "FQL!"+escape(fqlquery);
+    }
+    
+    this.runFqlExample = function(query){
+        $('#fql_query').attr('value', query);
+        $('#fql_query').submit();
+    }
+    
     this.authCallback = function(hash){
         var access_token = hash.substr(1).split('&')[0].split('=')[1]
         if(access_token){
@@ -115,12 +137,17 @@ function Controller(){
     };
     
     this.hashChange = function(hash){
-        console.log(hash)
+        //console.log(hash)
         var method = hash.split('!')[0];
         var url = hash.split('!')[1];
         
         // method or URL will be empty on load - do nothing.
         if (!method) return false;
+        
+        if (method == 'FQL') {
+            graph.fqlRequest(url);
+            return; // all done.
+        }
 
         // set the form state, and make the request!
         this.setMethod(method);
@@ -207,6 +234,44 @@ function Graph(){
         }
     }
     
+    this.fqlRequest = function(query){
+        if (!query) return false;
+        
+        var data = {};
+        data['format'] = 'json';
+        data['query'] = unescape(query);
+        
+        // use a user access_token if we have one...
+        var access_token = $('#access_token').attr('value');
+        if(access_token != '') {
+            data['access_token'] = access_token;
+        }
+
+        var that = this;
+        
+        $('#response').removeClass('error');
+        $('#response').addClass('loading');
+        $('#response-meta').hide();
+        $('#connections, #fields').hide();
+        $.ajax({
+            url: 'https://api.facebook.com/method/fql.query?callback=?',
+            data: data,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function(rsp, status, e) {
+                $('#response').removeClass('loading');
+                if (rsp.error_code){
+                    $('#response').addClass('error');
+                } else {
+
+                }
+                var jsonAsHtml = object2html(rsp);
+                $('#response').html(jsonAsHtml);
+            }
+        });
+        
+    }
+    
     this.request = function(url, method, params){
         var path = url.replace("https://graph.facebook.com/","");
         if (!path || path == '') return false;
@@ -229,7 +294,8 @@ function Graph(){
         
         $('#response').removeClass('error');
         $('#response').addClass('loading');
-        $('#connections, #fields').empty()
+        $('#connections, #fields').empty();
+        $('#response-meta').show();
         $.ajax({
             url: 'https://www.simoncross.com/fb/graph/proxy/'+path,
             data: data,

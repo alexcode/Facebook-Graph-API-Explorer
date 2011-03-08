@@ -103,6 +103,36 @@ h3 {
     width:300px;
 }
  
+ 
+/* FQL */
+
+#fql-panel{
+    padding-bottom: 10px;  
+    border-bottom: 1px solid #EEEEEE;
+    overflow:auto;
+}
+#fql_form{
+    margin: 0px 10px;
+    float:left;
+}
+#fql_query{
+    display: block;
+    font-family: monospace;
+    height: 100px;
+    padding: 5px;
+    position: relative;
+    width: 600px;
+}
+#fql_submit{
+    margin-top:5px;
+    font-size:2em;
+}
+#fql-examples {
+    float:left;
+}
+#fql-examples ul li a span {
+    display:none;
+}
 
 /* RESPONSE */
 
