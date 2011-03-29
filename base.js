@@ -15,6 +15,22 @@ function Controller(){
             $('#access_token').attr('value', '');
         })
         
+        // handle clicks on the tabs
+        $('#tabs ul li a').click(function(e){
+            e.preventDefault();
+            var clicked = $(e.target);
+            if($(clicked).hasClass('fql')){
+                if (window.location.hash.substring(0,4)!='#FQL'){
+                    window.location.hash = 'FQL';
+                }
+            } else {
+                if (window.location.hash.substring(0,4)=='#FQL'){
+                    window.location.hash = '';
+                }
+            }
+            return false
+        })
+        
         // listen for method select change events
         $('#select_method').change(function(){
             var method = $(this).attr('value');
@@ -141,13 +157,28 @@ function Controller(){
         var method = hash.split('!')[0];
         var url = hash.split('!')[1];
         
-        // method or URL will be empty on load - do nothing.
-        if (!method) return false;
-        
         if (method == 'FQL') {
-            graph.fqlRequest(url);
+            // switch tabs to FQL Query
+            $('#request-panel').fadeOut('fast',function(){
+                $('#fql-panel').fadeIn('fast');
+            });
+            $('#tabs ul li a').removeClass('active');
+            $('#tabs ul li a.fql').addClass('active');
+            if(url) {
+                graph.fqlRequest(url);
+            }
             return; // all done.
         }
+
+        // switch tabs to Graph Request
+        $('#fql-panel').fadeOut('fast',function(){
+            $('#request-panel').fadeIn('fast');
+        });
+        $('#tabs ul li a').removeClass('active');
+        $('#tabs ul li a.graph').addClass('active');
+        
+        // method or URL will be empty on load - do nothing.
+        if (!method) return false;
 
         // set the form state, and make the request!
         this.setMethod(method);
@@ -252,7 +283,6 @@ function Graph(){
         $('#response').removeClass('error');
         $('#response').addClass('loading');
         $('#response-meta').hide();
-        $('#connections, #fields').hide();
         $.ajax({
             url: 'https://api.facebook.com/method/fql.query?callback=?',
             data: data,
@@ -270,6 +300,17 @@ function Graph(){
             }
         });
         
+    }
+    
+    this.printHeaders = function(headers_raw){
+        headers = headers_raw.split('\n');
+        $('#headers').append('<dl></dl>');
+        for (i in headers){
+            if (headers[i]){
+                var split = headers[i].split(': ');
+                $('#headers dl').append('<dt>'+split[0]+'</dt><dd>'+split[1]+'</dd>');
+            }
+        }
     }
     
     this.request = function(url, method, params){
@@ -294,7 +335,7 @@ function Graph(){
         
         $('#response').removeClass('error');
         $('#response').addClass('loading');
-        $('#connections, #fields').empty();
+        $('#connections, #fields, #headers').empty();
         $('#response-meta').show();
         $.ajax({
             url: 'https://www.simoncross.com/fb/graph/proxy/'+path,
@@ -302,6 +343,7 @@ function Graph(){
             type: method,
             dataType: 'json',
             success: function(rsp, status, e) {
+                graph.printHeaders(e.getAllResponseHeaders());
                 $('#response').removeClass('loading');
                 if(rsp.metadata) {
                     var metadata = rsp.metadata;

@@ -2,16 +2,26 @@ body {
     font-family: Trebuchet MS;
     font-size: 13px;
 }
+a { outline:0;}
 #header {
-    background-color: #3B5998;
+    background-color: #dfe3ee;
+    position:relative;
+    border-bottom:1px solid #bfc3ce;
 }
 #header h1 {
-    color: #DFE3EE;
+    color: #333;
     font-size: 2em;
-    padding: 10px;
+    padding: 10px 10px 10px 50px;
+    background: url("f_logo.jpg") no-repeat scroll 10px center transparent;
+}
+#header #fb-like{
+    left: 410px;
+    position: absolute;
+    top: 14px;
 }
 h2 {
-    margin: 10px 0 5px 10px;
+    margin: 0 0 5px 10px;
+    padding-top: 10px;
     font-size:1.4em;
     font-weight:bold;
 }
@@ -61,19 +71,53 @@ h3 {
 
 
 #auth-panel{
-    border-bottom: 1px solid #EEEEEE;
-    padding-bottom: 10px;  
+    padding-bottom: 20px;  
 }
 
+/* tabs */
+#tabs {}
+#tabs ul {
+    border-bottom: 1px solid gray;
+}
+#tabs ul li {
+    display: inline-block;
+    height: 36px;
+}
+#tabs ul li a {
+       border-style: solid solid none;
+       border-width: 1px 1px medium;
+       display: inline-block;
+       height: 35px;
+       line-height: 31px;
+       margin-left: 10px;
+       padding: 0 18px;
+}
+#tabs ul li a.active {
+    background-color: #dfe3ee;
+    height:36px;
+    background-image:-moz-linear-gradient(top, #dfe3ee 0%, #eceff5 100%);
+    background-image:linear-gradient(top, #dfe3ee 0%, #eceff5 100%);
+    background-image:-webkit-gradient(linear, right top, right bottom, color-stop(0%,#dfe3ee), color-stop(100%,#eceff5));
+}
+
+#request-panel, #fql-panel {
+    background-image:-moz-linear-gradient(top, #eceff5 0%, #fff 50%);
+    background-image:linear-gradient(top, #eceff5 0%, #fff 50%);
+    background-image:-webkit-gradient(linear, right top, right bottom, color-stop(0%,#eceff5), color-stop(50%,#fff));
+    
+}
+
+/* request panel */
 #request-panel{
-    border-bottom: 1px solid #EEEEEE;
-    padding-bottom: 10px;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 20px;
+    clear:left;
 }
 #request-panel #request_form{
     margin: 0px 10px 0 10px;
 }
 #select_method {
-    width:70px;
+    width:90px;
 }
 #request_submit {
     width:50px;
@@ -107,9 +151,11 @@ h3 {
 /* FQL */
 
 #fql-panel{
-    padding-bottom: 10px;  
-    border-bottom: 1px solid #EEEEEE;
+    padding-bottom: 20px;  
+    border-bottom: 1px solid #bbb;
     overflow:auto;
+    clear:left;
+    display:none;
 }
 #fql_form{
     margin: 0px 10px;
@@ -125,7 +171,7 @@ h3 {
 }
 #fql_submit{
     margin-top:5px;
-    font-size:2em;
+    font-size:1.2em;
 }
 #fql-examples {
     float:left;
@@ -134,9 +180,14 @@ h3 {
     display:none;
 }
 
-/* RESPONSE */
+/* RESPONSE  PANEL */
 
-#response-panel {}
+#response-panel {
+    overflow:auto;
+    background-image:-moz-linear-gradient(top, #f9fafc 0%, #fff 50%);
+    background-image:linear-gradient(top, #f9fafc 0%, #fff 50%);
+    background-image:-webkit-gradient(linear, right top, right bottom, color-stop(0%,#f9fafc), color-stop(50%,#fff));
+}
 #response-body {
     float: left;
     width: 70%;
@@ -159,7 +210,6 @@ h3 {
 #response-meta #fields {
     clear: both;
     font-size: 0.8em;
-    height: 200px;
     margin-left: 10px;
     overflow: auto;
 }
@@ -172,6 +222,17 @@ h3 {
     float:left;
     width:70%;
 }
+
+#response-meta #headers {}
+#response-meta #headers dl {
+    margin: 0 10px;
+    font-size:0.8em;
+}
+#response-meta #headers dl dt {
+    width:100px;
+    float: left;
+}
+#response-meta #headers dl dd {}
 
 #response {
     border: 1px solid #DDDDDD;

@@ -5,6 +5,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Facebook Graph API Explorer</title>
+	<link rel="shortcut icon" href="http://facebook.com/favicon.ico" />
+	
+  <meta property="og:title" content="Facebook Graph API Explorer"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.simoncross.com/fb/graph/"/>
+  <meta property="og:image" content="https://www.simoncross.com/fb/graph/f_logo.png"/>
+  <meta property="og:site_name" content="SimonCross.com"/>
+  <meta property="fb:app_id" content="167160903315323"/>
 	
 	<link rel="stylesheet" type="text/css" href="reset.css">
 	<link rel="stylesheet" type="text/css" href="base.css">
@@ -18,6 +26,7 @@
 
 <div id="header">
 	<h1>Facebook Graph API Explorer</h1>
+	<iframe id="fb-like" src="http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.simoncross.com%2Ffb%2Fgraph%2F&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;font&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
 </div>
 
 <div id="auth-panel">
@@ -235,6 +244,13 @@
 	
 </div>
 
+<div id="tabs">
+	<ul>
+		<li><a href="#" class="active graph">Graph API</a></li>
+		<li><a href="#" class="fql">FQL Query</a></li>
+	</ul>
+</div>
+
 <div id="request-panel">
 	<h2>Request:</h2>
 	<form id="request_form">
@@ -267,6 +283,10 @@
 						<option value="end_time">end_time</option>
 						<option value="coordinates">coordinates</option>
 						<option value="place">place</option>
+						<option value="to">to</option>
+						<option value="context">context</option>
+						<option value="batch">batch</option>
+						<option value="tags">tags</option>
 					</select>
 					<input type="text" name="fieldvalue[]" />
 					<a href="#" class="remove_field">X</a>
@@ -322,9 +342,11 @@
 	</div>
 	<div id="response-meta">
 		<h2>Metadata</h2>
-		<h3>Connections</h3>
+		<h3>Connections for this Node</h3>
 		<div id="connections"></div>
-		<h3>Fields</h3>
+		<h3>Response Headers</h3>
+		<div id="headers"></div>
+		<h3>Fields for this Node</h3>
 		<div id="fields"></div>
 	</div> 
 </div>
