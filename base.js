@@ -331,6 +331,9 @@ function Graph(){
             data['access_token'] = access_token;
         }
 
+        // set the method - hacking over jsonp, but it works a treat
+        data['method'] = method;
+        
         var that = this;
         
         $('#response').removeClass('error');
@@ -338,12 +341,10 @@ function Graph(){
         $('#connections, #fields, #headers').empty();
         $('#response-meta').show();
         $.ajax({
-            url: 'https://www.simoncross.com/fb/graph/proxy/'+path,
+            url: 'https://graph.facebook.com/'+path,
             data: data,
-            type: method,
-            dataType: 'json',
-            success: function(rsp, status, e) {
-                graph.printHeaders(e.getAllResponseHeaders());
+            dataType: 'jsonp',
+            success: function(rsp) {
                 $('#response').removeClass('loading');
                 if(rsp.metadata) {
                     var metadata = rsp.metadata;
